@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ProductGrid from './components/ProductGrid';
 import ScoutView from './components/ScoutView';
+import ExpertView from './components/ExpertView';
+import DesignView from './components/DesignView';
 import { DEMO_PRODUCTS } from './constants';
 import { Product } from './types';
 
@@ -26,7 +28,7 @@ function App() {
       />
       
       <main className="flex-grow">
-        {activeView === 'home' ? (
+        {activeView === 'home' && (
           <>
             <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
               <div className="container mx-auto px-4 text-center">
@@ -45,9 +47,11 @@ function App() {
                 <ProductGrid products={filteredProducts} />
             </div>
           </>
-        ) : (
-          <ScoutView />
         )}
+        
+        {activeView === 'scout' && <ScoutView />}
+        {activeView === 'expert' && <ExpertView />}
+        {activeView === 'design' && <DesignView />}
       </main>
 
       <Footer />
