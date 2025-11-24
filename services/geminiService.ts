@@ -1,21 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { Product, ImageSize } from '../types';
 
-declare global {
-  interface Window {
-    aistudio?: {
-      hasSelectedApiKey: () => Promise<boolean>;
-      openSelectKey: () => Promise<void>;
-    };
-  }
-}
-
 // Helper to handle API Key selection for paid features
 async function ensureApiKey() {
-  if (window.aistudio) {
-    const hasKey = await window.aistudio.hasSelectedApiKey();
+  const win = window as any;
+  if (win.aistudio) {
+    const hasKey = await win.aistudio.hasSelectedApiKey();
     if (!hasKey) {
-      await window.aistudio.openSelectKey();
+      await win.aistudio.openSelectKey();
     }
   }
 }
